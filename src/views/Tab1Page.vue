@@ -389,7 +389,10 @@ async function play() {
 .board-cell.grey { background:#d3d3d3; }
 .board-cell.yellow { background:#f6e27a; }
 .board-cell.green { background:#6aaa64; color:#fff; }
-.cell-input { width:70%; height:70%; text-align:center; border:none; outline:none; background:transparent; font-size:1.5rem; font-weight:700; text-transform:uppercase; caret-color:auto; appearance:none; -webkit-appearance:none; border-radius:4px; }
+/* Ensure input text is visible in dark mode */
+.cell-input { width:70%; height:70%; text-align:center; border:none; outline:none; background:transparent; font-size:1.5rem; font-weight:700; text-transform:uppercase; caret-color:auto; appearance:none; -webkit-appearance:none; border-radius:4px; color:#000; }
+/* Keep white text on green tiles for contrast */
+.board-cell.green .cell-input { color: #fff; }
 .controls { display:flex; gap:12px; margin-top:20px; align-items:center; }
 .mode-select { margin:12px 0; display:flex; align-items:center; gap:8px; }
 .remaining-inline { font-weight:600; }
