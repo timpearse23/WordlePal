@@ -1,0 +1,7 @@
+{
+  "name": "wordlepal-temp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
