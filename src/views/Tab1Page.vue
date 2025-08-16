@@ -133,6 +133,17 @@ function onKeyDown(r: number, c: number, e: KeyboardEvent) {
   const key = e.key;
   const el = document.getElementById(inputId(r, c)) as HTMLInputElement | null;
 
+  // Enter / Return should trigger Play (useful for mobile keyboards)
+  if (key === 'Enter' || (e as any).keyCode === 13) {
+    e.preventDefault();
+    e.stopPropagation();
+    // blur the focused input to dismiss the on-screen keyboard
+    if (el) el.blur();
+    // call play()
+    try { play(); } catch (_) {}
+    return;
+  }
+
   // treat Delete (and legacy 'Del' / keyCode 46) as clear current cell
   if (key === 'Delete' || key === 'Del' || (e as any).keyCode === 46) {
     e.preventDefault();
@@ -381,8 +392,9 @@ async function play() {
 
 <style scoped>
 .wordle-page { background: #ffffff; }
-.content { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; }
-.board-wrapper { width:100%; max-width:420px; }
+/* Center content within the viewport (accounts for header) */
+.content { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px; min-height: calc(100vh - 56px); box-sizing:border-box; }
+.board-wrapper { width:100%; max-width:420px; display:flex; align-items:center; justify-content:center; }
 .board { display:grid; gap:8px; }
 .board-row { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
 .board-cell { position:relative; width:100%; aspect-ratio:1/1; border:2px solid #e0e0e0; display:flex; align-items:center; justify-content:center; background:#fff; box-sizing:border-box; border-radius:6px; }
